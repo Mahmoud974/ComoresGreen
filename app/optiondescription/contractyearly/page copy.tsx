@@ -4,20 +4,20 @@ import React from "react";
 export default function MiniNav() {
   return (
     <section className="mx-auto container text-black">
-      <div className="flex mx-auto container text-xl lg:flex-row items-center justify-between p-10">
+      <div className="flex mx-auto container text-xl xl:flex-row items-center justify-between p-10">
         {/* Image Section */}
-        <div className="lg:w-1/2 w-full p-5">
+        <div className="xl:w-1/2 w-full p-5">
           <Image
             width={800}
             height={800}
             src="/contact.jpg"
             alt="Élagage Image"
-            className="rounded-lg shadow-lg"
+            className="rounded-xl shadow-xl"
           />
         </div>
 
         {/* Text Section */}
-        <div className="lg:w-1/2 w-full p-5 ">
+        <div className="xl:w-1/2 w-full p-5 ">
           <h2 className="text-2xl font-bold mb-4">{`Contrat Annuel d'Élagage`}</h2>
           <ul className="list-disc pl-6 mb-6 space-y-4">
             <li>

@@ -1,10 +1,12 @@
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-
 import { TbSquareRoundedArrowUp } from "react-icons/tb";
 import { zodResolver } from "@hookform/resolvers/zod";
+import emailjs from "emailjs-com";
+import { useState } from "react";
 
-const FormaData = z.object({
+// Définition du schéma de validation avec Zod
+const FormSchema = z.object({
   name: z
     .string()
     .min(2, "Le nom doit contenir au moins 2 caractères")
@@ -20,32 +22,62 @@ const FormaData = z.object({
     .max(500, "Le message ne peut dépasser 500 caractères"),
 });
 
-type FormData = z.infer<typeof FormaData>;
+type FormData = z.infer<typeof FormSchema>;
 
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(FormaData),
+    resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    // Logique d'envoi du formulaire ou traitement supplémentaire
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setIsSubmitting(true);
+    try {
+      // Envoi de l'email via EmailJS
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          subject: data.subject,
+          message: data.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      console.log("Message envoyé avec succès", response.status, response.text);
+      setSuccessMessage("Votre message a été envoyé avec succès !");
+      reset(); // Réinitialise le formulaire
+
+      // Supprime le message après 5 secondes
+      setTimeout(() => setSuccessMessage(null), 5000);
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du message :", error);
+      alert("Une erreur s'est produite. Veuillez réessayer.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section className="md:bg-gradient-to-b md:from-green-800 md:to-green-700 bg-black my-12 ">
+    <section className="xl:bg-gradient-to-b xl:from-green-800 xl:to-green-700 bg-black my-12">
       <div className="container mx-auto px-4 mb-12">
         <h2 className="text-3xl text-white font-bold text-center mb-8">
           Contactez-nous
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-xl"
+          className="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-xl"
         >
+          {/* Nom complet */}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -57,7 +89,7 @@ export default function ContactForm() {
               type="text"
               id="name"
               {...register("name")}
-              className={`w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none ${
+              className={`w-full px-3 py-2 border rounded-xl text-gray-700 focus:outline-none ${
                 errors.name ? "border-red-500" : ""
               }`}
             />
@@ -66,6 +98,7 @@ export default function ContactForm() {
             )}
           </div>
 
+          {/* Email */}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -77,7 +110,7 @@ export default function ContactForm() {
               type="email"
               id="email"
               {...register("email")}
-              className={`w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none ${
+              className={`w-full px-3 py-2 border rounded-xl text-gray-700 focus:outline-none ${
                 errors.email ? "border-red-500" : ""
               }`}
             />
@@ -88,6 +121,7 @@ export default function ContactForm() {
             )}
           </div>
 
+          {/* Sujet */}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -99,7 +133,7 @@ export default function ContactForm() {
               type="text"
               id="subject"
               {...register("subject")}
-              className={`w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none ${
+              className={`w-full px-3 py-2 border rounded-xl text-gray-700 focus:outline-none ${
                 errors.subject ? "border-red-500" : ""
               }`}
             />
@@ -110,6 +144,7 @@ export default function ContactForm() {
             )}
           </div>
 
+          {/* Message */}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -120,7 +155,7 @@ export default function ContactForm() {
             <textarea
               id="message"
               {...register("message")}
-              className={`w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none ${
+              className={`w-full px-3 py-2 border rounded-xl text-gray-700 focus:outline-none ${
                 errors.message ? "border-red-500" : ""
               }`}
               rows={5}
@@ -132,15 +167,27 @@ export default function ContactForm() {
             )}
           </div>
 
+          {/* Bouton d'envoi */}
           <div className="text-center">
             <button
               type="submit"
-              className="px-4 py-2 bg-green-900 text-white rounded-lg hover:bg-green-700 focus:outline-none"
+              disabled={isSubmitting}
+              className={`px-4 py-2 ${
+                isSubmitting
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-green-900 hover:bg-green-700"
+              } text-white rounded-xl focus:outline-none`}
             >
-              Envoyer le message
+              {isSubmitting ? "Envoi..." : "Envoyer le message"}
             </button>
           </div>
         </form>
+
+        {/* Message de confirmation */}
+        {successMessage && (
+          <p className="text-green-500 text-center mt-4">{successMessage}</p>
+        )}
+
         <div className="flex justify-end ">
           <TbSquareRoundedArrowUp className="text-5xl text-white cursor-pointer" />
         </div>

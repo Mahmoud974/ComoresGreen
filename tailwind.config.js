@@ -7,7 +7,25 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        beige: "#f5f5dc", // Ajoutez votre couleur beige ici
+      },
+    },
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin"), require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#f5f5dc",
+          secondary: "#f5deb3",
+          accent: "#d2b48c",
+          neutral: "#f5f5dc",
+          "base-100": "#f5f5dc",
+        },
+      },
+      "light",
+    ],
+  },
 };

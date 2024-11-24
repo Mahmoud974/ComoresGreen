@@ -4,11 +4,11 @@ export default function AboutSection() {
   return (
     <section className="relative font-inter antialiased bg-gray-100 py-12">
       <main className="relative min-h-screen flex flex-col justify-center bg-slate-50 overflow-hidden">
-        <div className="w-full max-w-5xl mx-auto px-4 md:px-6 py-24">
+        <div className="w-full max-w-5xl mx-auto px-4 xl:px-6 py-24">
           <h2 className="text-3xl font-bold mb-6 text-center text-green-800">
             À propos de <span className="text-green-600">Green Comores</span>
           </h2>
-          <p className="text-lg mb-6 text-gray-700 text-center">
+          <p className="text-xl mb-6 text-gray-700 text-center">
             Chez <strong>Green Comores</strong>,{" "}
             {`nous sommes passionnés par
             l'art de l'élagage et de l'entretien des espaces verts. Forts d'une
@@ -18,7 +18,7 @@ export default function AboutSection() {
             qualité pour maintenir et améliorer la beauté de vos jardins et
             espaces extérieurs.`}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
             <div className="mb-6">
               <h3 className="text-2xl font-semibold text-green-700 mb-4">
                 Notre Mission
@@ -44,7 +44,7 @@ export default function AboutSection() {
             </div>
           </div>
           <div className="mt-8 text-center">
-            <p className="text-lg text-gray-700">
+            <p className="text-xl text-gray-700">
               {` Nous croyons que chaque projet est unique, c'est pourquoi nous
               travaillons en étroite collaboration avec nos clients pour
               répondre à leurs attentes. Contactez-nous dès aujourd'hui pour
@@ -54,7 +54,7 @@ export default function AboutSection() {
           </div>
         </div>
       </main>
-      <footer className="absolute left-6 right-6 md:left-12 md:right-auto bottom-4 md:bottom-8 text-center md:text-left">
+      <footer className="absolute left-6 right-6 xl:left-12 xl:right-auto bottom-4 xl:bottom-8 text-center xl:text-left">
         <a
           className="text-xs text-slate-500 hover:underline"
           href="https://cruip.com"
@@ -62,8 +62,8 @@ export default function AboutSection() {
           &copy; Cruip - Tailwind CSS templates
         </a>
       </footer>
-      <div className="fixed bottom-0 right-0 w-full md:bottom-6 md:right-12 md:w-auto z-50">
-        <div className="bg-slate-800 text-sm p-3 md:rounded shadow flex justify-between">
+      <div className="fixed bottom-0 right-0 w-full xl:bottom-6 xl:right-12 xl:w-auto z-50">
+        <div className="bg-slate-800 text-sm p-3 xl:rounded shadow flex justify-between">
           <div className="text-slate-500 inline-flex">
             <a
               className="font-medium hover:underline text-slate-300"

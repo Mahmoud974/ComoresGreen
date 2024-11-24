@@ -113,7 +113,7 @@ export default function Block() {
                   name="surface"
                   value={formData.surface}
                   onChange={handleChange}
-                  className="border border-gray-300 p-2 mt-4 w-full rounded-md outline outline-offset-1 outline-3"
+                  className="border border-gray-300 p-2 mt-4 w-full rounded-xl outline outline-offset-1 outline-3"
                   placeholder="0 m²"
                 />
                 <div className="mt-6 flex justify-between">
@@ -148,7 +148,7 @@ export default function Block() {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
+                    className="border border-gray-300 p-2 w-full rounded-xl"
                     placeholder="Prénom *"
                   />
                   <input
@@ -156,7 +156,7 @@ export default function Block() {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
+                    className="border border-gray-300 p-2 w-full rounded-xl"
                     placeholder="Nom *"
                   />
                   <input
@@ -164,7 +164,7 @@ export default function Block() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
+                    className="border border-gray-300 p-2 w-full rounded-xl"
                     placeholder="E-mail *"
                   />
                   <input
@@ -172,7 +172,7 @@ export default function Block() {
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
+                    className="border border-gray-300 p-2 w-full rounded-xl"
                     placeholder="Adresse du jardin *"
                   />
                 </div>
@@ -214,7 +214,7 @@ export default function Block() {
                     name="comment"
                     value={formData.comment}
                     onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
+                    className="border border-gray-300 p-2 w-full rounded-xl"
                     placeholder="Ajoutez un commentaire, des précisions..."
                     maxLength={450}
                   />
@@ -248,7 +248,7 @@ export default function Block() {
           height={1000}
           src="/cut.jpg" // Remplace cette image par la tienne
           alt="Élagage Image"
-          className="shadow-lg w-full h-full object-cover "
+          className="shadow-xl w-full h-full object-cover "
         />
       </div>
     </section>

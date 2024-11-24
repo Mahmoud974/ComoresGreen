@@ -27,7 +27,7 @@ export default function Custom404() {
       {/* Bouton de retour */}
       <Link
         href="/"
-        className="inline-block px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:bg-green-800 transition duration-300 ease-in-out"
+        className="inline-block px-6 py-3 bg-green-600 text-white font-semibold rounded-xl shadow-xl hover:bg-green-700 focus:bg-green-800 transition duration-300 ease-in-out"
       >
         {`Retour à l'accueil`}
       </Link>

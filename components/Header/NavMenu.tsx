@@ -23,7 +23,7 @@ export function NavigationMenuDemo() {
       {/* Menu mobile */}
       <Sheet>
         <SheetTrigger>
-          <Menu className="lg:hidden flex text-green-600" />
+          <Menu className="xl:hidden flex text-green-600" />
         </SheetTrigger>
         <SheetContent className="bg-white p-4">
           <SheetHeader>
@@ -71,7 +71,7 @@ export function NavigationMenuDemo() {
       </Sheet>
 
       {/* Menu desktop */}
-      <NavigationMenu className="lg:flex hidden uppercase ">
+      <NavigationMenu className="xl:flex hidden uppercase ">
         <NavigationMenuList className="flex space-x-4">
           <NavigationMenuItem className="relative group ">
             <Link href="#home" legacyBehavior passHref>

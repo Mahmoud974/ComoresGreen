@@ -17,7 +17,7 @@ export default function Page() {
   const { count, increment, decrement } = useCounter(10);
   return (
     <>
-      <section className="mx-auto max-w-7xl container  text-black md:mb-8">
+      <section className="xl:mx-auto  max-w-7xl container  text-black xl:mb-8">
         <Header />
         <Home />
         <NavPrestation />

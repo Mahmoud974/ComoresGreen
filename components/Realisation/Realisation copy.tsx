@@ -17,15 +17,15 @@ export default function Realisation() {
           >
             <div className="container mx-auto text-center">
               <h2 className="text-4xl font-bold mb-12">Nos realisations</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
                 {/* Carte Élagage */}
-                <div className="bg-gray-900 rounded-lg p-6 shadow-lg">
+                <div className="bg-gray-900 rounded-xl p-6 shadow-xl">
                   <Image
                     src="/cut.jpg" // Remplacer avec le bon chemin d'image
                     alt="Paysage"
                     width={500}
                     height={250}
-                    className="rounded-lg mb-6"
+                    className="rounded-xl mb-6"
                   />
                   <h3 className="text-2xl font-semibold mb-4">Élagage</h3>
                   <p className="text-gray-400">
@@ -37,13 +37,13 @@ export default function Realisation() {
                 </div>
 
                 {/* Carte Paysage */}
-                <div className="bg-gray-900 rounded-lg p-6 shadow-lg">
+                <div className="bg-gray-900 rounded-xl p-6 shadow-xl">
                   <Image
                     src="/cut.jpg" // Remplacer avec le bon chemin d'image
                     alt="Paysage"
                     width={500}
                     height={250}
-                    className="rounded-lg mb-6"
+                    className="rounded-xl mb-6"
                   />
                   <h3 className="text-2xl font-semibold mb-4">Paysage</h3>
                   <p className="text-gray-400">
@@ -54,13 +54,13 @@ export default function Realisation() {
                 </div>
 
                 {/* Carte Création */}
-                <div className="bg-gray-900 rounded-lg p-6 shadow-lg">
+                <div className="bg-gray-900 rounded-xl p-6 shadow-xl">
                   <Image
                     src="/cut.jpg" // Remplacer avec le bon chemin d'image
                     alt="Paysage"
                     width={500}
                     height={250}
-                    className="rounded-lg mb-6"
+                    className="rounded-xl mb-6"
                   />
                   <h3 className="text-2xl font-semibold mb-4">Création</h3>
                   <p className="text-gray-400">

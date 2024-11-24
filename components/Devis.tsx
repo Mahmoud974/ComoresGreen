@@ -16,7 +16,7 @@ const FormDataSchema = z.object({
 type FormData = z.infer<typeof FormDataSchema>;
 
 export default function Devis() {
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     service: "",
     surface: "",
@@ -27,8 +27,9 @@ export default function Devis() {
     comment: "",
   });
 
-  const handleNext = () => setStep((prevStep) => prevStep + 1);
-  const handlePrevious = () => setStep((prevStep) => prevStep - 1);
+  const handleStepChange = (direction: "next" | "prev") => {
+    setStep((prev) => prev + (direction === "next" ? 1 : -1));
+  };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,211 +43,166 @@ export default function Devis() {
     alert("Demande de devis soumise avec succès!");
   };
 
+  const StepNavigation = ({
+    hasPrevious,
+    hasNext,
+    onSubmit,
+  }: {
+    hasPrevious: boolean;
+    hasNext: boolean;
+    onSubmit?: boolean;
+  }) => (
+    <div className="mt-6 flex justify-between">
+      {hasPrevious && (
+        <button
+          type="button"
+          onClick={() => handleStepChange("prev")}
+          className="bg-white rounded-full w-12 h-12 mx-auto"
+        >
+          <p className="font-bold text-green-600">←</p>
+        </button>
+      )}
+      {hasNext ? (
+        <button
+          type="button"
+          onClick={() => handleStepChange("next")}
+          className="bg-white rounded-full w-12 h-12 mx-auto"
+        >
+          <p className="font-bold text-green-600">→</p>
+        </button>
+      ) : (
+        onSubmit && (
+          <button
+            type="submit"
+            className="bg-green-900 shadow-xl rounded-full w-12 h-12 mx-auto"
+          >
+            <p className="font-bold text-white">→</p>
+          </button>
+        )
+      )}
+    </div>
+  );
+
   return (
-    <section className="flex text-black mb-12 ">
-      <div className="bg-gradient-to-b from-green-800 to-green-700 md:w-full h-[45rem] flex items-center">
+    <section className="flex text-black mb-12">
+      <div className="bg-gradient-to-b from-green-800 to-green-700 xl:w-full xl:h-[45rem] flex items-center">
         <div className="max-w-xl mx-auto p-8 text-white">
           <form onSubmit={handleSubmit}>
             {step === 1 && (
-              <div className="step-1 flex flex-col">
-                <h2 className="text-4xl font-bold mb-2 text-center mt-12">
+              <div className="flex flex-col">
+                <h2 className="xl:text-4xl text-2xl font-bold text-center my-12">
                   Vous souhaitez <span className="text-lime-500">aménager</span>{" "}
                   ou
                   <span className="text-lime-500"> entretenir</span> votre
                   jardin ?
                 </h2>
-                <p className="text-sm mb-4">
+                <p className="text-sm text-center mb-4">
                   Sélectionnez votre besoin pour recevoir des devis gratuits
                   personnalisés.
                 </p>
-                <div className="mt-4 space-y-4">
-                  <label className="flex justify-between bg-green-900 cursor-pointer hover:border-black hover:border-3 rounded-full p-5">
-                    <div className="flex">
-                      <input
-                        type="radio"
-                        name="service"
-                        value="Création et aménagement d’un jardin"
-                        checked={
-                          formData.service ===
-                          "Création et aménagement d’un jardin"
-                        }
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      <p>Création et aménagement d’un jardin</p>
-                    </div>
-                    <p className="font-bold">→</p>
-                  </label>
-                  <label className="flex justify-between bg-green-900 cursor-pointer rounded-full p-5">
-                    <div className="flex">
-                      <input
-                        type="radio"
-                        name="service"
-                        value="Entretien d’un jardin"
-                        checked={formData.service === "Entretien d’un jardin"}
-                        onChange={handleChange}
-                        className="mr-2"
-                      />
-                      <p>Entretien d’un jardin</p>
-                    </div>
-                    <p className="font-bold">→</p>
-                  </label>
+                <div className="space-y-4">
+                  {[
+                    "Création et aménagement d’un jardin",
+                    "Entretien d’un jardin",
+                  ].map((service) => (
+                    <label
+                      key={service}
+                      className="flex items-center justify-between bg-green-900 cursor-pointer rounded-full p-5"
+                    >
+                      <div className="flex">
+                        <input
+                          type="radio"
+                          name="service"
+                          value={service}
+                          checked={formData.service === service}
+                          onChange={handleChange}
+                          className="mr-2"
+                        />
+                        <p className="text-xs xl:text-xl">{service}</p>
+                      </div>
+                      <p className="font-bold">→</p>
+                    </label>
+                  ))}
                 </div>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="mt-6 bg-white rounded-full w-12 h-12 mx-auto"
-                >
-                  <p className="font-bold text-green-600">→</p>
-                </button>
+                <StepNavigation hasPrevious={false} hasNext />
               </div>
             )}
 
             {step === 2 && (
-              <div className="step-2">
-                <h2 className="text-2xl font-bold mb-2">
-                  Quelle est la <span className="text-green-400">surface</span>{" "}
-                  de votre <span className="text-green-400">jardin</span> ?
+              <div>
+                <h2 className="xl:text-4xl text-2xl font-bold mb-2 text-center">
+                  Quelle est la <span className="text-lime-500">surface</span>{" "}
+                  de votre jardin ?
                 </h2>
                 <input
                   type="number"
                   name="surface"
                   value={formData.surface}
                   onChange={handleChange}
-                  className="border border-gray-300 p-2 mt-4 w-full rounded-md outline outline-offset-1 outline-3"
+                  className="border border-gray-300 p-2 mt-4 w-full rounded-xl outline outline-offset-1 outline-3"
                   placeholder="0 m²"
                 />
-                <div className="mt-6 flex justify-between">
-                  <button
-                    type="button"
-                    onClick={handlePrevious}
-                    className="bg-white rounded-full w-12 h-12 mx-auto"
-                  >
-                    <p className="font-bold text-green-600">←</p>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNext}
-                    className="bg-white rounded-full w-12 h-12 mx-auto"
-                  >
-                    <p className="font-bold text-green-600">→</p>
-                  </button>
-                </div>
+                <StepNavigation hasPrevious hasNext />
               </div>
             )}
 
             {step === 3 && (
-              <div className="step-3">
-                <h2 className="text-2xl font-bold mb-2 text-center">
-                  <span className="text-green-400">Informations</span>{" "}
+              <div>
+                <h2 className="xl:text-3xl xl:mb-6 mb-3 text-2xl font-bold   text-center">
+                  <span className="text-lime-500">Informations</span>{" "}
                   personnelles
                 </h2>
-                <div className="mt-4 space-y-4">
+                {["firstName", "lastName", "email", "address"].map((field) => (
                   <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
+                    key={field}
+                    type={field === "email" ? "email" : "text"}
+                    name={field}
+                    value={formData[field as keyof FormData]}
                     onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
-                    placeholder="Prénom *"
+                    className="border border-gray-300 p-2 w-full rounded-xl mb-4"
+                    placeholder={`${
+                      field.charAt(0).toUpperCase() + field.slice(1)
+                    } *`}
                   />
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
-                    placeholder="Nom *"
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
-                    placeholder="E-mail *"
-                  />
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
-                    placeholder="Adresse du jardin *"
-                  />
-                </div>
-                <div className="mt-6 flex justify-around">
-                  <button
-                    type="button"
-                    onClick={handlePrevious}
-                    className="bg-white rounded-full w-12 h-12 mx-auto"
-                  >
-                    <p className="font-bold text-green-600">←</p>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNext}
-                    className="bg-green-900 shadow-xl rounded-full w-12 h-12 mx-auto"
-                  >
-                    <p className="font-bold text-white">→</p>
-                  </button>
-                </div>
+                ))}
+                <StepNavigation hasPrevious hasNext />
               </div>
             )}
 
             {step === 4 && (
-              <div className="step-4">
-                <h2 className="text-2xl font-bold mb-2">
-                  Validez votre demande
+              <div>
+                <h2 className="xl:text-4xl text-2xl font-bold mb-2 text-center">
+                  Validez votre <span className="text-lime-500">demande</span>
                 </h2>
-                <p className="mt-2">
-                  <strong>Service :</strong> {formData.service}
-                </p>
-                <p className="mt-2">
-                  <strong>Surface :</strong> {formData.surface} m²
-                </p>
-                <p className="mt-2">
-                  <strong>Adresse :</strong> {formData.address}
-                </p>
-                <div className="mt-4">
-                  <textarea
-                    name="comment"
-                    value={formData.comment}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 w-full rounded-md"
-                    placeholder="Ajoutez un commentaire, des précisions..."
-                    maxLength={450}
-                  />
-                </div>
-                <div className="mt-6 flex justify-between">
-                  <button
-                    type="button"
-                    onClick={handlePrevious}
-                    className="bg-white rounded-full w-12 h-12 mx-auto"
-                  >
-                    <p className="font-bold text-green-600">←</p>
-                  </button>
-                  <button
-                    type="submit"
-                    className="bg-green-900 shadow-xl rounded-full w-12 h-12 mx-auto"
-                  >
-                    <p className="font-bold text-white">→</p>
-                  </button>
-                </div>
+                {["service", "surface", "address"].map((key) => (
+                  <p key={key} className="mt-2">
+                    <strong>
+                      {key.charAt(0).toUpperCase() + key.slice(1)} :
+                    </strong>{" "}
+                    {formData[key as keyof FormData]}
+                  </p>
+                ))}
+                <textarea
+                  name="comment"
+                  value={formData.comment}
+                  onChange={handleChange}
+                  className="border border-gray-300 p-2 w-full rounded-xl mt-4"
+                  placeholder="Ajoutez un commentaire, des précisions..."
+                  maxLength={450}
+                />
+                <StepNavigation hasPrevious hasNext={false} onSubmit />
               </div>
             )}
           </form>
         </div>
       </div>
-
-      {/* Right Column: Image */}
-      <div className="md:flex hidden bg-green-200 w-full h-[45rem]">
+      <div className="xl:flex hidden bg-green-200 w-full h-[45rem]">
         <Image
           width={1000}
           height={1000}
           src="/cut.jpg"
           alt="Élagage Image"
-          className="shadow-lg w-full h-full object-cover"
+          className="shadow-xl w-full h-full object-cover"
         />
       </div>
     </section>

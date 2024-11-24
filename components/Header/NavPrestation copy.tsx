@@ -76,7 +76,7 @@ export default function NavPrestation() {
 
   return (
     <section className="mx-auto container relative -mt-12">
-      <div className="block md:hidden text-center">
+      <div className="block xl:hidden text-center">
         <Popover>
           <PopoverTrigger asChild>
             <Button

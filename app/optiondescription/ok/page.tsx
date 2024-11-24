@@ -35,7 +35,7 @@ export default function page() {
 
   return (
     <section className="bg-gray-100 py-12">
-      <div className="container mx-auto p-8 bg-white rounded-lg shadow-lg max-w-lg">
+      <div className="container mx-auto p-8 bg-white rounded-xl shadow-xl max-w-xl">
         <h2 className="text-3xl font-bold text-center mb-8">
           Demande de devis
         </h2>
@@ -53,7 +53,7 @@ export default function page() {
               id="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none"
+              className="w-full px-4 py-2 border rounded-xl text-gray-700 focus:outline-none"
               required
             />
           </div>
@@ -71,7 +71,7 @@ export default function page() {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none"
+              className="w-full px-4 py-2 border rounded-xl text-gray-700 focus:outline-none"
               required
             />
           </div>
@@ -89,7 +89,7 @@ export default function page() {
               id="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none"
+              className="w-full px-4 py-2 border rounded-xl text-gray-700 focus:outline-none"
               required
             />
           </div>
@@ -106,7 +106,7 @@ export default function page() {
               id="prestationType"
               value={formData.prestationType}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none"
+              className="w-full px-4 py-2 border rounded-xl text-gray-700 focus:outline-none"
               required
             >
               <option value="">-- Sélectionnez une prestation --</option>
@@ -130,7 +130,7 @@ export default function page() {
               id="details"
               value={formData.details}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none"
+              className="w-full px-4 py-2 border rounded-xl text-gray-700 focus:outline-none"
               rows={4}
               placeholder="Décrivez votre projet en quelques mots..."
               required
@@ -150,7 +150,7 @@ export default function page() {
               id="date"
               value={formData.date}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none"
+              className="w-full px-4 py-2 border rounded-xl text-gray-700 focus:outline-none"
               required
             />
           </div>
@@ -158,7 +158,7 @@ export default function page() {
           <div className="text-center">
             <button
               type="submit"
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none"
+              className="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 focus:outline-none"
             >
               Envoyer la demande de devis
             </button>

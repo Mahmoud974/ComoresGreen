@@ -15,7 +15,7 @@ export default function Caroussel() {
             alt="Élagage"
             width={400}
             height={250}
-            className="rounded-lg mb-6"
+            className="rounded-xl mb-6"
           />
         </CarouselItem>
         <CarouselItem>
@@ -24,7 +24,7 @@ export default function Caroussel() {
             alt="Élagage"
             width={400}
             height={250}
-            className="rounded-lg mb-6"
+            className="rounded-xl mb-6"
           />
         </CarouselItem>
         <CarouselItem>...</CarouselItem>
