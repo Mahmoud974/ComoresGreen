@@ -7,12 +7,12 @@ export default function Home() {
   const [value, setValue] = React.useState<string>("contractyearly");
 
   return (
-    <section className="container mx-auto flex items-center text-wrap justify-between mt-7">
+    <section className="container mx-auto flex items-center text-wrap xl:justify-between justify-center mt-7">
       <div className="h-96 space-y-2 justify-start xl:items-start w-[32rem] text-center xl:text-left">
         <p className="text-lime-500 font-bold text-xs xl:text-xl">
           GIGALAND MARKET
         </p>
-        <h1 className="font-bold xl:text-5xl text-2xl xl:mx-0 mx-1">
+        <h1 className="font-bold xl:text-xl lg:text-4xl text-2xl xl:mx-0 mx-1">
           Navigating the digital landscape for success
         </h1>
         <p className="text-base xl:text-xl">
@@ -26,7 +26,7 @@ export default function Home() {
               {/* Premier compteur */}
               <div className="relative flex items-center justify-center">
                 <div className="rounded-xl transform transition-transform duration-300 hover:scale-105 text-center">
-                  <h3 className="xl:text-6xl text-3xl font-bold text-green-700">
+                  <h3 className=" lg:text-6xl text-3xl font-bold text-green-700">
                     <CountUp start={0} end={550} duration={1} />+
                   </h3>
                   <p className="text-gray-600 text-left mt-2 xl:text-xl text-xs">
@@ -40,10 +40,10 @@ export default function Home() {
               {/* Deuxième compteur */}
               <div className="relative flex items-center justify-center">
                 <div className="xl:text-left text-center rounded-xl transform transition-transform duration-300 hover:scale-105  ">
-                  <h3 className="xl:text-6xl text-3xl font-bold text-green-700">
+                  <h3 className="lg:text-6xl  text-3xl font-bold text-green-700">
                     <CountUp start={0} end={100} duration={1} suffix="m²" />
                   </h3>
-                  <p className="text-gray-600 mt-2 text-left xl:text-xl text-xs">
+                  <p className="text-gray-600 mt-2 text-left   xl:text-xl text-xs">
                     Gazon coupé
                   </p>
                 </div>
@@ -53,7 +53,7 @@ export default function Home() {
 
               {/* Troisième compteur */}
               <div className="xl:text-left text-center rounded-xl transform transition-transform duration-300 hover:scale-105">
-                <h3 className="xl:text-6xl text-3xl font-bold text-green-700">
+                <h3 className="lg:text-6xl  text-3xl font-bold text-green-700">
                   <CountUp start={0} end={20} duration={1} />
                 </h3>
                 <p className="text-gray-600 mt-2 text-left whitespace-nowrap xl:text-xl text-xs">

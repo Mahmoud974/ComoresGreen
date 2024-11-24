@@ -84,8 +84,8 @@ export default function Devis() {
   );
 
   return (
-    <section className="flex text-black mb-12">
-      <div className="bg-gradient-to-b from-green-800 to-green-700 xl:w-full xl:h-[45rem] flex items-center">
+    <section className="md:flex md:justify-center text-black mb-12">
+      <div className="bg-gradient-to-b from-green-800 to-green-700 xl:w-full w-screen xl:h-[45rem] flex items-center">
         <div className="max-w-xl mx-auto p-8 text-white">
           <form onSubmit={handleSubmit}>
             {step === 1 && (
